@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using ProductService.Shared.Requests;
+using ProductService.Shared;
 
 namespace ProductService.Controllers
 {
@@ -9,18 +11,20 @@ namespace ProductService.Controllers
 
         private readonly ILogger<ProductController> _logger;
 
-        public ProductController(ILogger<ProductController> logger)
+        private readonly IProductService _productService;
+
+        public ProductController(ILogger<ProductController> logger, IProductService productService)
         {
             _logger = logger;
+            _productService = productService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<Models.Product> Get()
+        [HttpGet(Name = "GetProduct")]
+        public GetProductResponse Get()
         {
-            yield return new Models.Product()
-            {
+            var response = _productService.GetProducts(null);
 
-            };
+            return response;
         }
     }
 }
