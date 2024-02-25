@@ -21,14 +21,20 @@ namespace ProductService.Dal
             var optionBuilder = new DbContextOptionsBuilder<NWindProductContext>();
             optionBuilder.UseLazyLoadingProxies();
             optionBuilder.UseSqlServer("Server=192.168.29.52;Database=Northwind;User Id=sa;Password=Cbse#1728;Encrypt=false;TrustServerCertificate=true;");
-            var context = new NWindProductContext(optionBuilder.Options);
+            _dbContext = new NWindProductContext(optionBuilder.Options);
         }
 
         public IList<ProductDto> GetProducts()
         {
-            var products = _dbContext.Products.ToList();
-
-            return _mapper.Map<IList<Product>, IList<ProductDto>>(products);
+            try
+            {
+                var products = _dbContext.Products.ToList();
+                return _mapper.Map<IList<Product>, IList<ProductDto>>(products);
+            }
+            catch (Exception ex)
+            {
+                return new List<ProductDto>() { new ProductDto() { ProductName = ex.ToString() } };
+            }
         }
     }
 
@@ -38,7 +44,7 @@ namespace ProductService.Dal
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new ProductProfile());  
+                cfg.AddProfile(new ProductProfile());
             });
 
             return config;
