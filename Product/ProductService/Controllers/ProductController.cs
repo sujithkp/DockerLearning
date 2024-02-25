@@ -31,7 +31,7 @@ namespace ProductService.Controllers
             connection.Open();
 
 
-            var response = _productService.GetProducts(null);
+            var response = new GetProductResponse();
 
             response.Message = connection.State.ToString();
 
