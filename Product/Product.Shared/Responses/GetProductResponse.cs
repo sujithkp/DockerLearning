@@ -10,5 +10,7 @@ namespace ProductService.Shared.Requests
         }
 
         public IList<ProductService.Shared.Dto.Entities.ProductDto> Products { get; set; }
+
+        public string Message { get; set; }
     }
 }
