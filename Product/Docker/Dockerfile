@@ -3,6 +3,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ProductService/*", "ProductService/"]
+COPY ["Product.Shared/*", "Product.Shared/"]
+COPY ["Product.Dal/*", "Product.Dal/"]
+COPY ["Product.Business/*", "Product.Business/"]
 
 RUN dotnet restore "./ProductService/./ProductService.csproj"
 
