@@ -1,4 +1,5 @@
 ﻿using Product.WebServer.Common;
+using ProductService.Shared.Dto.Entities;
 
 namespace Product.WebServer.Services.ProductService
 {
@@ -9,18 +10,9 @@ namespace Product.WebServer.Services.ProductService
 
         }
 
-        public GenericResponse<Product> GetProductById(int id)
+        public GenericResponse<ProductDto> GetProductById(int id)
         {
-            var response = new GenericResponse<Product>();
-            response.Data = new Product
-            {
-                Id = id,
-                Name = "Product Name",
-                Description = "Product Description",
-                Price = 100
-            };
-            response.Success = true;
-            return response;
+             
         }
     }
 }
