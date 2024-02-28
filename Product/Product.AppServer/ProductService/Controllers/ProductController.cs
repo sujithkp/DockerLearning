@@ -4,6 +4,7 @@ using ProductService.Shared;
 using Microsoft.Data.SqlClient;
 using ProductService.Dal;
 using Microsoft.AspNetCore.Hosting.Server;
+using ProductService.Shared.Common;
 
 namespace ProductService.Controllers
 {
@@ -23,10 +24,25 @@ namespace ProductService.Controllers
         }
 
         [HttpGet(Name = "GetProduct")]
-        public GetProductResponse Get()
+        public GenericResponse<GetProductResponse> Get()
         {
-            var response = _productService.GetProducts(null);
-            return response;
+            try
+            {
+                return new GenericResponse<GetProductResponse>()
+                {
+                    Data = _productService.GetProducts(null),
+                    ErrorMessage = null,
+                    IsSuccess = true
+                };
+            }catch (Exception ex)
+            {
+                return new GenericResponse<GetProductResponse>()
+                {
+                    Data = null,
+                    ErrorMessage = ex.Message,
+                    IsSuccess = false
+                };
+            }
         }
     }
 }
