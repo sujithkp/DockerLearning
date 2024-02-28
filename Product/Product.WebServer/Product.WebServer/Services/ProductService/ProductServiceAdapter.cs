@@ -6,7 +6,7 @@ namespace Product.WebServer.Services.ProductService
 {
     public class ProductServiceAdapter
     {
-        private readonly Uri _baseUri = new Uri("http://localhost:5215/");
+        private readonly Uri _baseUri = new Uri("http://product-api:5215/");
 
         public ProductServiceAdapter()
         {
