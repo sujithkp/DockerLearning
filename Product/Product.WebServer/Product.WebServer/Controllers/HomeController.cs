@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Product.WebServer.Models;
+using Product.WebServer.Services.ProductService;
 using System.Diagnostics;
 
 namespace Product.WebServer.Controllers
@@ -17,7 +18,9 @@ namespace Product.WebServer.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var response = new ProductServiceAdapter().GetProductById(1);
+
+            return View(response.Data);
         }
 
         public IActionResult Privacy()
