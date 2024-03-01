@@ -15,10 +15,14 @@ namespace Product.WebServer.Controllers
         }
 
         public IActionResult Index()
-        {
-            var response = new ProductServiceAdapter().GetProductById(1);
+        {  var response = new Product.WebServer.Services.ProductService.Models.Response.GetProductResponse();        
+            try {
+            response = new ProductServiceAdapter().GetProductById(1).Data;
+            } catch (Exception ex) {
 
-            return View(response.Data);
+                response.Message = ex.ToString();
+            }
+            return View(response);
         }
 
         public IActionResult Privacy()

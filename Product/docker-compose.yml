@@ -3,6 +3,13 @@ services:
   product-api:
     build:
       dockerfile: ./Docker/Dockerfile
-      context: .
+      context: ./Product.AppServer
     ports:
       - "6080:8080"
+  productwebui:
+    build:
+      dockerfile: ./Docker/Dockerfile
+      context: ./Product.WebServer
+    ports:
+      - "9080:9080"
+  
