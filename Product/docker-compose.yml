@@ -11,5 +11,5 @@ services:
       dockerfile: ./Docker/Dockerfile
       context: ./Product.WebServer
     ports:
-      - "9080:9080"
+      - "9080:5080"
   
