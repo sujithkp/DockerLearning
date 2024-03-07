@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using ProductService.Dal;
 using Microsoft.AspNetCore.Hosting.Server;
 using ProductService.Shared.Common;
+using Serilog;
 
 namespace ProductService.Controllers
 {
@@ -21,6 +22,10 @@ namespace ProductService.Controllers
         {
             _logger = logger;
             _productService = productService;
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.NewRelicLogs()
+                .CreateLogger();
         }
 
         [HttpGet(Name = "GetProduct")]
@@ -28,6 +33,8 @@ namespace ProductService.Controllers
         {
             try
             {
+                Log.Information("GetProduct called");
+
                 return new GenericResponse<GetProductResponse>()
                 {
                     Data = _productService.GetProducts(null),
