@@ -33,7 +33,15 @@ namespace ProductService.Controllers
         {
             try
             {
-                Log.Information("GetProduct called");
+                if (DateTime.Now.Millisecond % 7 == 0)
+                {
+                    Log.Information("Payment Declined.");
+                }
+                else
+                {
+                     Log.Information("Payment Accepted.");
+                }
+
 
                 return new GenericResponse<GetProductResponse>()
                 {
