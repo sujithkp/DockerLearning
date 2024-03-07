@@ -33,13 +33,13 @@ namespace ProductService.Controllers
         {
             try
             {
-                if (DateTime.Now.Millisecond % 7 == 0)
+                if (DateTime.Now.Millisecond % 2 == 0)
                 {
                     Log.Information("Payment Declined.");
                 }
                 else
                 {
-                     Log.Information("Payment Accepted.");
+                    Log.Information("Payment Accepted.");
                 }
 
 
@@ -49,8 +49,10 @@ namespace ProductService.Controllers
                     ErrorMessage = null,
                     IsSuccess = true
                 };
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
+                Response.StatusCode = 500;
                 return new GenericResponse<GetProductResponse>()
                 {
                     Data = null,
