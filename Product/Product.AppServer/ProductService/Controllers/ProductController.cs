@@ -33,7 +33,7 @@ namespace ProductService.Controllers
         {
             try
             {
-                if (DateTime.Now.Millisecond % 2 == 0)
+                if (DateTime.Now.Millisecond % 13 == 0)
                 {
                     Log.Information("Payment Declined.");
                 }
