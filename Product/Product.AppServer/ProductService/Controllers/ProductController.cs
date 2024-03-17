@@ -25,6 +25,7 @@ namespace ProductService.Controllers
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.NewRelicLogs()
+                .Enrich.FromLogContext().Enrich.WithProperty("Application", "ProductService")
                 .CreateLogger();
         }
 
@@ -35,11 +36,13 @@ namespace ProductService.Controllers
             {
                 if (DateTime.Now.Millisecond % 13 == 0)
                 {
-                    Log.Information("Payment Declined.");
+                    Log.ForContext("SessionId", DateTime.Now.ToFileTime())
+                        .Information("Payment Declined.");
                 }
                 else
                 {
-                    Log.Information("Payment Accepted.");
+                    Log.ForContext("SessionId", DateTime.Now.ToFileTime())
+                    .Information("Payment Accepted.");
                 }
 
 
